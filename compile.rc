@@ -1,0 +1,22 @@
+if os != 'windows'
+    depends('clang')
+    depends('mkdir')
+    depends('mv')
+    
+    [setup]:
+        make_dir = ['mkdir', '-p', './bin']
+
+    [compile]:
+        compiler = 'clang'
+        args = ['-std=c17', '-O3', '-DNDEBUG', '-march=native', '-mtune=native', '-masm=intel', '-flto']
+        src = './src/fsize.c'
+        out = ['-o', './bin/fsize']
+
+    [install]:
+        cmds = ['sudo', 'mv', './bin/fsize', '/usr/bin/']
+    
+    [all]:
+        setup()
+        compile()
+        install()
+endif
