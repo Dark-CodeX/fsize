@@ -6,7 +6,7 @@
 enum FILE_SIZE_TYPE
 {
     BIT = 8,          // multiply
-    BYTES = 1,        // multiply
+    BYTES = 1,        // as-it-is BASE
     KIB = 1024,       // divide
     MIB = 1048576,    // divide
     GIB = 1073741824, // divide
