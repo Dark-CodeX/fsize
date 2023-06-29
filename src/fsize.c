@@ -3,6 +3,8 @@
 #include <string.h>
 #include <errno.h>
 
+#define FSIZE_VER "1.0.0"
+
 enum FILE_SIZE_TYPE
 {
     BIT = 8,          // multiply
@@ -23,15 +25,40 @@ int main(int argc, char **argv)
         return EXIT_FAILURE;
     }
     int i = 1;
+    if (strcmp(argv[i], "--help") == 0)
+    {
+        puts("Usage: [option] [files]");
+        puts("Options:");
+        puts("    --help                             Display this help message.");
+        puts("    --version                          Display the version of the app.");
+        puts("    --size=<unit_of_byte>              Converts bytes into other units.");
+        puts("          =bit, bits, BIT, BITS        Converts bytes into bits.");
+        puts("          =byte, bytes, BYTE, BYTES    Default size.");
+        puts("          =kib, KIB                    Converts bytes into kibibytes.");
+        puts("          =mib, MIB                    Converts bytes into mebibytes.");
+        puts("          =gib, GIB                    Converts bytes into gibibytes.");
+        puts("          =kb, KB                      Converts bytes into kilobytes.");
+        puts("          =mb, MB                      Converts bytes into megabytes.");
+        puts("          =gb, GB                      Converts bytes into gigabytes.");
+
+        return EXIT_SUCCESS;
+    }
+    if (strcmp(argv[i], "--version") == 0)
+    {
+        printf("%s: %s\n", argv[0], FSIZE_VER);
+        return EXIT_SUCCESS;
+    }
     enum FILE_SIZE_TYPE type = BYTES; // default type is BYTES
     if (strncmp(argv[i], "--size=", 7) == 0)
     {
         argv[i] += 7; // skip `--size=` which is total of 7 characters/bytes excluding null-terminating character
-        if (strcmp(argv[i], "bit") == 0 || strcmp(argv[i], "bits") == 0)
+        if (strcmp(argv[i], "bit") == 0 || strcmp(argv[i], "bits") == 0 ||
+            strcmp(argv[i], "BIT") == 0 || strcmp(argv[i], "BITS") == 0)
         {
             type = BIT;
         }
-        else if (strcmp(argv[i], "byte") == 0 || strcmp(argv[i], "bytes") == 0)
+        else if (strcmp(argv[i], "byte") == 0 || strcmp(argv[i], "bytes") == 0 ||
+                 strcmp(argv[i], "BYTE") == 0 || strcmp(argv[i], "BYTES") == 0)
         {
             type = BYTES;
         }
