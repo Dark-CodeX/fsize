@@ -119,22 +119,22 @@ int main(int argc, char **argv)
             printf("%s: %zu bytes\n", argv[i], len);
             break;
         case KIB:
-            printf("%s: %0.2f kibibytes\n", argv[i], (float)len / KIB);
+            printf("%s: %0.3f kibibytes\n", argv[i], (float)len / KIB);
             break;
         case MIB:
-            printf("%s: %0.2f mebibytes\n", argv[i], (float)len / MIB);
+            printf("%s: %0.3f mebibytes\n", argv[i], (float)len / MIB);
             break;
         case GIB:
-            printf("%s: %0.2f gibibytes\n", argv[i], (float)len / GIB);
+            printf("%s: %0.3f gibibytes\n", argv[i], (float)len / GIB);
             break;
         case KB:
-            printf("%s: %0.2f kilobytes\n", argv[i], (float)len / KB);
+            printf("%s: %0.3f kilobytes\n", argv[i], (float)len / KB);
             break;
         case MB:
-            printf("%s: %0.2f megabytes\n", argv[i], (float)len / MB);
+            printf("%s: %0.3f megabytes\n", argv[i], (float)len / MB);
             break;
         case GB:
-            printf("%s: %0.2f gigabytes\n", argv[i], (float)len / GB);
+            printf("%s: %0.3f gigabytes\n", argv[i], (float)len / GB);
             break;
         }
 
