@@ -8,6 +8,13 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
+#include <stdbool.h>
+#if defined _WIN32 || defined _WIN64 || defined __CYGWIN__
+#include <Windows.h>
+#else
+#include <sys/stat.h>
+#include <sys/types.h>
+#endif
 
 #define FSIZE_VER "1.0.0"
 
@@ -22,6 +29,26 @@ enum FILE_SIZE_TYPE
     MB = 1000000,     // divide
     GB = 1000000000   // divide
 };
+
+bool is_directory(const char *loc)
+{
+    if (!loc)
+        return false;
+#if defined _WIN32 || defined _WIN64 || defined __CYGWIN__
+    DWORD fileAttributes = GetFileAttributesA(loc.c_str());
+    if (fileAttributes == INVALID_FILE_ATTRIBUTES)
+        return false;
+    else if (fileAttributes & FILE_ATTRIBUTE_DIRECTORY)
+        return true;
+    else
+        return false;
+#else
+    struct stat buffer;
+    if (stat(loc, &buffer) == 0 && S_ISDIR(buffer.st_mode))
+        return true;
+#endif
+    return false;
+}
 
 int main(int argc, char **argv)
 {
@@ -106,11 +133,16 @@ int main(int argc, char **argv)
     }
     for (; i < argc; i++)
     {
+        if (is_directory(argv[i]) == true)
+        {
+            fprintf(stderr, "err: '%s': Is a directory\n", argv[i]);
+            continue;
+        }
         FILE *fptr = fopen(argv[i], "rb");
         if (!fptr)
         {
             fprintf(stderr, "err: fopen(): '%s': %s\n", argv[i], strerror(errno));
-            return EXIT_FAILURE;
+            continue;
         }
         fseek(fptr, 0, SEEK_END);
         size_t len = ftell(fptr); // size of file in bytes
