@@ -35,7 +35,7 @@ bool is_directory(const char *loc)
     if (!loc)
         return false;
 #if defined _WIN32 || defined _WIN64 || defined __CYGWIN__
-    DWORD fileAttributes = GetFileAttributesA(loc.c_str());
+    DWORD fileAttributes = GetFileAttributesA(loc);
     if (fileAttributes == INVALID_FILE_ATTRIBUTES)
         return false;
     else if (fileAttributes & FILE_ATTRIBUTE_DIRECTORY)
