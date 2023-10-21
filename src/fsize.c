@@ -151,28 +151,28 @@ int main(int argc, char **argv)
         switch (type)
         {
         case BIT:
-            printf("%s: %zu bits\n", argv[i], len * BIT);
+            printf("%zu bits : %s\n", len * BIT, argv[i]);
             break;
         case BYTES:
-            printf("%s: %zu bytes\n", argv[i], len);
+            printf("%zu bytes : %s\n", len, argv[i]);
             break;
         case KIB:
-            printf("%s: %0.3f kibibytes\n", argv[i], (float)len / KIB);
+            printf("%0.3f kibibytes : %s \n", (float)len / KIB, argv[i]);
             break;
         case MIB:
-            printf("%s: %0.3f mebibytes\n", argv[i], (float)len / MIB);
+            printf("%0.3f mebibytes : %s \n", (float)len / MIB, argv[i]);
             break;
         case GIB:
-            printf("%s: %0.3f gibibytes\n", argv[i], (float)len / GIB);
+            printf("%0.3f gibibytes : %s \n", (float)len / GIB, argv[i]);
             break;
         case KB:
-            printf("%s: %0.3f kilobytes\n", argv[i], (float)len / KB);
+            printf("%0.3f kilobytes : %s \n", (float)len / KB, argv[i]);
             break;
         case MB:
-            printf("%s: %0.3f megabytes\n", argv[i], (float)len / MB);
+            printf("%0.3f megabytes : %s \n", (float)len / MB, argv[i]);
             break;
         case GB:
-            printf("%s: %0.3f gigabytes\n", argv[i], (float)len / GB);
+            printf("%0.3f gigabytes : %s \n", (float)len / GB, argv[i]);
             break;
         }
 
